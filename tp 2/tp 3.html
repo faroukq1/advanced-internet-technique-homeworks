@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>exo1</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-family: Arial, sans-serif;
+      }
+
+      .hello-container {
+        width: 80%;
+        border: 1px solid black;
+        padding: 10px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hello {
+        font-size: 3rem;
+        font-weight: bold;
+        color: green;
+        position: relative;
+        left: 0;
+      }
+
+      .container {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container div {
+        height: 100px;
+        width: 100%;
+        border: 1px solid black;
+        display: none;
+        opacity: 0;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      .button-container button {
+        background-color: gray;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 8px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hello-container">
+      <p class="hello">HELLO</p>
+    </div>
+
+    <div class="container">
+      <div class="item1">item1</div>
+      <div class="item2">item2</div>
+      <div class="item3">item3</div>
+    </div>
+
+    <div class="button-container">
+      <button class="show">Show</button>
+      <button class="welcome">Welcome</button>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $(".show").click(function () {
+          const show = $(this).text() === "Show";
+
+          if (show) {
+            $(this).text("Hide");
+            $(".container div").each(function (index) {
+              $(this)
+                .delay(300 * index)
+                .fadeTo(600, 1);
+            });
+          } else {
+            $(this).text("Show");
+            $(".container div").fadeOut(300);
+          }
+        });
+
+        $(".welcome").click(function () {
+          const $hello = $(".hello");
+          const containerWidth = $(".hello-container").width();
+          const helloWidth = $hello.width();
+
+          $hello.animate({ left: containerWidth - helloWidth - 20 }, 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
